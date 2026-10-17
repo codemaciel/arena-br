@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ARENA BR — FPS 3D rápido para navegador, em português." />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>ARENA BR — FPS 3D</title>
+  </head>
+  <body>
+    <div id="game-root"></div>
+
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div id="crosshair"><i></i><i></i><i></i><i></i></div>
+      <div id="hitmarker"></div>
+      <div id="damage-flash"></div>
+
+      <div class="hud-top">
+        <div class="hud-box" id="hud-mode">PARTIDA</div>
+        <div class="hud-box hud-timer" id="hud-time">5:00</div>
+        <div class="hud-box" id="hud-score">PONTOS 0</div>
+      </div>
+      <div class="hud-stats" id="hud-stats">ELIMINAÇÕES 0 · MORTES 0</div>
+      <div id="killfeed"></div>
+      <div id="toast"></div>
+
+      <div class="hud-bottom-left">
+        <div class="hp-label">VIDA <span id="hud-hp-text">100</span></div>
+        <div class="hp-bar"><div id="hud-hp-bar"></div></div>
+      </div>
+      <div class="hud-bottom-right">
+        <div class="ammo"><span id="hud-ammo">30</span><small> / <span id="hud-reserve">∞</span></small></div>
+        <div id="hud-reload">RECARREGANDO…</div>
+      </div>
+
+      <div id="scoreboard" class="hidden">
+        <h3>PLACAR</h3>
+        <table>
+          <thead><tr><th>#</th><th>Jogador</th><th>Elim.</th><th>Mortes</th><th>Pontos</th></tr></thead>
+          <tbody id="sb-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Menu inicial -->
+    <section id="screen-menu" class="screen">
+      <div class="panel">
+        <h1 class="logo">ARENA<span>BR</span></h1>
+        <p class="tagline">FPS 3D rápido no navegador</p>
+        <button id="btn-play" class="btn primary">JOGAR</button>
+        <button id="btn-training" class="btn">TREINAMENTO</button>
+        <button id="btn-settings" class="btn">CONFIGURAÇÕES</button>
+        <div class="diff">
+          <span>Dificuldade dos bots</span>
+          <div id="menu-difficulty" class="chips">
+            <button data-diff="facil">Fácil</button>
+            <button data-diff="normal">Normal</button>
+            <button data-diff="dificil">Difícil</button>
+          </div>
+        </div>
+        <p class="hint">W A S D mover · Shift correr · Espaço pular · Mouse mirar · Clique atirar · R recarregar · Tab placar · Esc pausar</p>
+      </div>
+    </section>
+
+    <!-- Configurações -->
+    <section id="screen-settings" class="screen hidden">
+      <div class="panel">
+        <h2>CONFIGURAÇÕES</h2>
+        <label>Sensibilidade do mouse <b id="set-sens-val">1.00</b>
+          <input id="set-sens" type="range" min="0.1" max="3" step="0.05" />
+        </label>
+        <label>Volume <b id="set-vol-val">60%</b>
+          <input id="set-vol" type="range" min="0" max="100" step="1" />
+        </label>
+        <label>Campo de visão (FOV) <b id="set-fov-val">80°</b>
+          <input id="set-fov" type="range" min="60" max="110" step="1" />
+        </label>
+        <label>Dificuldade dos bots
+          <select id="set-diff">
+            <option value="facil">Fácil</option>
+            <option value="normal">Normal</option>
+            <option value="dificil">Difícil</option>
+          </select>
+        </label>
+        <button id="btn-settings-back" class="btn primary">VOLTAR</button>
+      </div>
+    </section>
+
+    <!-- Pausa -->
+    <section id="screen-pause" class="screen hidden">
+      <div class="panel">
+        <h2>PAUSADO</h2>
+        <p id="pause-msg" class="hint"></p>
+        <button id="btn-resume" class="btn primary">CONTINUAR</button>
+        <button id="btn-restart" class="btn">REINICIAR PARTIDA</button>
+        <button id="btn-pause-settings" class="btn">CONFIGURAÇÕES</button>
+        <button id="btn-quit" class="btn danger">SAIR PARA O MENU</button>
+      </div>
+    </section>
+
+    <!-- Fim de partida -->
+    <section id="screen-end" class="screen hidden">
+      <div class="panel wide">
+        <h2 id="end-title">VITÓRIA</h2>
+        <p id="end-subtitle" class="hint"></p>
+        <table class="board">
+          <thead><tr><th>#</th><th>Jogador</th><th>Elim.</th><th>Mortes</th><th>Pontos</th></tr></thead>
+          <tbody id="end-board"></tbody>
+        </table>
+        <button id="btn-again" class="btn primary">JOGAR NOVAMENTE</button>
+        <button id="btn-end-menu" class="btn">MENU</button>
+      </div>
+    </section>
+
+    <!-- Erro -->
+    <section id="screen-error" class="screen hidden">
+      <div class="panel">
+        <h2>NÃO FOI POSSÍVEL INICIAR</h2>
+        <p id="error-text" class="hint"></p>
+        <button class="btn primary" onclick="location.reload()">TENTAR NOVAMENTE</button>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
